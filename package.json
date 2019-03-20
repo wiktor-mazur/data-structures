@@ -1,6 +1,9 @@
 {
   "name": "data-structures",
   "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wiktor-mazur/data-structures.git"
@@ -10,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/wiktor-mazur/data-structures/issues"
   },
-  "homepage": "https://github.com/wiktor-mazur/data-structures#readme"
+  "homepage": "https://github.com/wiktor-mazur/data-structures#readme",
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
 }
