@@ -9,7 +9,7 @@ Code in this repository is mainly **educational** and probably **should not be u
 
 ## Data structures
 So far I've managed to cover:
-- [Stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+- <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Stack</a>
 
 ## License
 Source code is shared under **MIT License**.
