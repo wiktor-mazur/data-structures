@@ -10,6 +10,7 @@ Code in this repository is mainly **educational** and probably **should not be u
 ## Data structures
 So far I've managed to cover:
 - <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Stack</a>
+- <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">Queue</a>
 
 ## License
 Source code is shared under **MIT License**.
