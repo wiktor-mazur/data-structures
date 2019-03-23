@@ -12,7 +12,7 @@ class Stack {
   /**
    * Returns top element from stack without removing it.
    *
-   * @returns {null | * }
+   * @returns { null | * }
    */
   peek() {
     return this.isEmpty() ? null : this._storage[this._top];
@@ -70,7 +70,7 @@ class Stack {
   /**
    * Removes the topmost element from the stack and returns it.
    *
-   * @returns { null | *} Returns null when the stack is empty.
+   * @returns { null | * } Returns null when the stack is empty.
    */
   pop() {
     if (this.isEmpty()) {
