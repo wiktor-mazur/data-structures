@@ -24,6 +24,12 @@ describe('Stack', () => {
       stack.peek();
       expect(stack.peek()).toEqual(19);
     });
+
+    test('should return null if stack is empty', () => {
+      stack._storage = [];
+      stack._top = -1;
+      expect(stack.peek()).toBeNull();
+    });
   });
 
   describe('#search', () => {
