@@ -37,6 +37,13 @@ class Set {
     };
   }
 
+  /**
+   * Returns item's index in storage
+   *
+   * @param { * } item
+   *
+   * @returns { number }
+   */
   _find(item) {
     item = normalizeZeros(item);
 
