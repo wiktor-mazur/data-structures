@@ -20,7 +20,7 @@ class Set {
   }
 
   /**
-   * Returns a new Iterator object that contains an each element of the Set.
+   * Returns a new Iterator object that contains each element of the Set.
    *
    * @returns { { next: Function } }
    */
