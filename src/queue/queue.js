@@ -1,3 +1,5 @@
+const { isIterable } = require('../helpers/is-iterable/is-iterable');
+
 class Queue {
   /**
    * Creates empty queue storage.
@@ -22,13 +24,15 @@ class Queue {
   /**
    * Adds a list of items to the end of the queue.
    *
-   * @param { Array<*> } items
+   * @param { [iterable] } items
    */
   batchEnqueue(items) {
-    if (Array.isArray(items)) {
-      items.forEach(item => {
-        this._storage.push(item);
-      });
+    if (!isIterable(items)) {
+      throw new TypeError('Argument items must be an iterable object.');
+    }
+
+    for (let item of items) {
+      this._storage.push(item);
     }
   }
 

@@ -58,7 +58,7 @@ describe('Queue', () => {
   });
 
   describe('#batchEnqueue', () => {
-    test('should enqueue the list of items', () => {
+    test('should enqueue the array of items', () => {
       queue._storage = ['first'];
       queue.batchEnqueue(['enqueue_test', 'enqueue_test2', 'enqueue_test3']);
       expect(queue.peekLast()).toEqual('enqueue_test3');
@@ -66,6 +66,27 @@ describe('Queue', () => {
       expect(queue.dequeue()).toEqual('enqueue_test');
       expect(queue.dequeue()).toEqual('enqueue_test2');
       expect(queue.dequeue()).toEqual('enqueue_test3');
+    });
+
+    test('should enqueue the iterable object', () => {
+      const iterable = {
+        *[Symbol.iterator]() {
+         yield 'enqueue_test234';
+         yield 'enqueue_test678';
+         yield 'enqueue_test863';
+        }
+      };
+
+      queue._storage = ['first'];
+      queue.batchEnqueue(iterable);
+      expect(queue.peekLast()).toEqual('enqueue_test863');
+      expect(queue.dequeue()).toEqual('first');
+      expect(queue.dequeue()).toEqual('enqueue_test234');
+      expect(queue.dequeue()).toEqual('enqueue_test678');
+    });
+
+    test('should throw if non-iterable argument was passed', () => {
+      expect(() => {queue.batchEnqueue({obj: 1})}).toThrow();
     });
   });
 
