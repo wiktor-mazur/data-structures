@@ -20,21 +20,18 @@ class Set {
   }
 
   /**
-   * Returns a new Iterator object that contains each element of the Set.
+   * Yields every element of the Set.
    *
-   * @returns { { next: Function } }
+   * @generator
+   *
+   * @yields { * }
    */
-  [Symbol.iterator]() {
+  *[Symbol.iterator]() {
     let index = -1;
 
-    return {
-      next: () => {
-        return {
-          value: this._storage[++index],
-          done: !(index in this._storage)
-        }
-      }
-    };
+    while (++index in this._storage) {
+      yield this._storage[index];
+    }
   }
 
   /**
