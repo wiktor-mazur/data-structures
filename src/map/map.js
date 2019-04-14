@@ -20,23 +20,18 @@ class Map {
   }
 
   /**
-   * Returns a new Iterator object that contains an key-value pair for each element in the Map.
+   * Yields an key-value pair for each element in the Map.
    *
-   * @returns { { next: Function } }
+   * @generator
+   *
+   * @yields { [*, *] } key-value pair
    */
-  [Symbol.iterator]() {
+  *[Symbol.iterator]() {
     let index = -1;
 
-    return {
-      next: () => {
-        ++index;
-
-        return {
-          value: [this._keys[index], this._values[index]],
-          done: !(index in this._values)
-        }
-      }
-    };
+    while (++index in this._values) {
+      yield [this._keys[index], this._values[index]];
+    }
   }
 
   /**
