@@ -74,6 +74,8 @@ class LinkedList {
   /**
    * Returns list's node at given index or null.
    *
+   * @param { number } index
+   *
    * @throws TypeError
    *
    * @returns { LinkedListNode | null }
@@ -103,6 +105,8 @@ class LinkedList {
   /**
    * Returns list's node containing given data or null.
    *
+   * @param { * } data
+   *
    * @returns { LinkedListNode | null }
    */
   findNodeByData(data) {
@@ -117,6 +121,8 @@ class LinkedList {
 
   /**
    * Checks whether the list contains given node or not.
+   *
+   * @param { LinkedListNode } node
    *
    * @returns { boolean }
    */
@@ -172,6 +178,8 @@ class LinkedList {
   /**
    * Removes node at given index from the list.
    *
+   * @param { number } index
+   *
    * @throws TypeError
    *
    * @returns { boolean }
@@ -195,6 +203,8 @@ class LinkedList {
   /**
    * Inserts given node to the end of the list and returns it.
    *
+   * @param { LinkedListNode | * } node
+   *
    * @returns { LinkedListNode }
    */
   insertEndNode(node) {
@@ -213,6 +223,8 @@ class LinkedList {
 
   /**
    * Inserts given node to the beginning of the list and returns it.
+   *
+   * @param { LinkedListNode | * } node
    *
    * @returns { LinkedListNode }
    */
