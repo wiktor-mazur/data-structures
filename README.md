@@ -15,6 +15,7 @@ So far I've managed to cover:
 - <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">Queue</a>
 - <a href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)">Set</a>
 - <a href="https://en.wikipedia.org/wiki/Associative_array">Map</a>
+- <a href="https://en.wikipedia.org/wiki/Linked_list">Linked List</a>
 
 ## License
 Source code is shared under **MIT License**.
