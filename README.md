@@ -11,11 +11,11 @@ Code in this repository is mainly **educational** and probably **should not be u
 
 ## Data structures
 So far I've managed to cover:
-- <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Stack</a>
-- <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">Queue</a>
-- <a href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)">Set</a>
-- <a href="https://en.wikipedia.org/wiki/Associative_array">Map</a>
-- <a href="https://en.wikipedia.org/wiki/Linked_list">Linked List</a>
+- <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/stack">Stack</a> - <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">(wiki)</a>
+- <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/queue">Queue</a> - <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">(wiki)</a>
+- <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/set">Set</a> - <a href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)">(wiki)</a>
+- <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/map">Map</a> - <a href="https://en.wikipedia.org/wiki/Associative_array">(wiki)</a>
+- <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/linked-list">Linked list</a> - <a href="https://en.wikipedia.org/wiki/Linked_list">(wiki)</a>
 
 ## License
 Source code is shared under **MIT License**.
