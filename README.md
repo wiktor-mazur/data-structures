@@ -1,16 +1,13 @@
 # Data structures
-I've created this repository to train and better understand basic data structures such as list, set, stack, etc. 
+This repository contains implementations for various data structures and it's made for educational purposes.
 
-If particular data structure is also implemented in the native JavaScript I try to make my implementation's API as similar as possible.
-
-Code in this repository is mainly **educational** and probably **should not be used in production**.
+If particular data structure is already implemented in the native JavaScript I try to make my implementation's API as similar as possible.
 
 ## Stack
 - JavaScript (ES2015+)
 - Jest
 
-## Data structures
-So far I've managed to cover:
+## Implemented data structures
 - <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/stack">Stack</a> - <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">(wiki)</a>
 - <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/queue">Queue</a> - <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">(wiki)</a>
 - <a href="https://github.com/wiktor-mazur/data-structures/tree/master/src/set">Set</a> - <a href="https://en.wikipedia.org/wiki/Set_(abstract_data_type)">(wiki)</a>
