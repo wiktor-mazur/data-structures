@@ -1,16 +1,14 @@
-const { Queue } = require('./queue');
+import { Queue } from './queue';
 
 describe('Queue', () => {
-  let queue;
-
-  test('should create empty storage on construction', () => {
-    const queue = new Queue();
-    expect(queue._storage).toEqual([]);
-  });
+  let emptyQueue: Queue<any>;
+  let queue: Queue<any>;
 
   beforeEach(() => {
     queue = new Queue();
-    queue._storage = [1, 'f', 5, 'test', 6, true, 19];
+    queue.batchEnqueue([1, 'f', 5, 'test', 6, true, 19]);
+
+    emptyQueue = new Queue();
   });
 
   describe('#peek', () => {
@@ -24,8 +22,7 @@ describe('Queue', () => {
     });
 
     test('should return null if queue is empty', () => {
-      queue._storage = [];
-      expect(queue.peek()).toBeNull();
+      expect(emptyQueue.peek()).toBeNull();
     });
   });
 
@@ -35,14 +32,17 @@ describe('Queue', () => {
     });
 
     test('should return true if the queue is empty', () => {
-      queue._storage = [];
-      expect(queue.isEmpty()).toBe(true);
+      expect(emptyQueue.isEmpty()).toBe(true);
     });
   });
 
   describe('#size', () => {
     test('should return queue\'s size', () => {
       expect(queue.size()).toEqual(7);
+    });
+
+    test('should return empty queue\'s size', () => {
+      expect(emptyQueue.size()).toEqual(0);
     });
   });
 
@@ -59,13 +59,13 @@ describe('Queue', () => {
 
   describe('#batchEnqueue', () => {
     test('should enqueue the array of items', () => {
-      queue._storage = ['first'];
-      queue.batchEnqueue(['enqueue_test', 'enqueue_test2', 'enqueue_test3']);
-      expect(queue.peekLast()).toEqual('enqueue_test3');
-      expect(queue.dequeue()).toEqual('first');
-      expect(queue.dequeue()).toEqual('enqueue_test');
-      expect(queue.dequeue()).toEqual('enqueue_test2');
-      expect(queue.dequeue()).toEqual('enqueue_test3');
+      emptyQueue.enqueue('first');
+      emptyQueue.batchEnqueue(['enqueue_test', 'enqueue_test2', 'enqueue_test3']);
+      expect(emptyQueue.peekLast()).toEqual('enqueue_test3');
+      expect(emptyQueue.dequeue()).toEqual('first');
+      expect(emptyQueue.dequeue()).toEqual('enqueue_test');
+      expect(emptyQueue.dequeue()).toEqual('enqueue_test2');
+      expect(emptyQueue.dequeue()).toEqual('enqueue_test3');
     });
 
     test('should enqueue the iterable object', () => {
@@ -77,16 +77,17 @@ describe('Queue', () => {
         }
       };
 
-      queue._storage = ['first'];
-      queue.batchEnqueue(iterable);
-      expect(queue.peekLast()).toEqual('enqueue_test863');
-      expect(queue.dequeue()).toEqual('first');
-      expect(queue.dequeue()).toEqual('enqueue_test234');
-      expect(queue.dequeue()).toEqual('enqueue_test678');
+      emptyQueue.enqueue('first');
+      emptyQueue.batchEnqueue(iterable);
+      expect(emptyQueue.peekLast()).toEqual('enqueue_test863');
+      expect(emptyQueue.dequeue()).toEqual('first');
+      expect(emptyQueue.dequeue()).toEqual('enqueue_test234');
+      expect(emptyQueue.dequeue()).toEqual('enqueue_test678');
     });
 
     test('should throw if non-iterable argument was passed', () => {
-      expect(() => {queue.batchEnqueue({obj: 1})}).toThrow();
+      // @ts-ignore
+      expect(() => {queue.batchEnqueue({ obj: 1 })}).toThrow();
     });
   });
 
@@ -101,8 +102,7 @@ describe('Queue', () => {
     });
 
     test('should return null if the queue was empty', () => {
-      queue._storage = [];
-      expect(queue.dequeue()).toBeNull();
+      expect(emptyQueue.dequeue()).toBeNull();
     });
   });
 });

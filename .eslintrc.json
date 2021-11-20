@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "object-curly-spacing": ["error", "always"],
+    "no-trailing-spaces": "error",
+    "eol-last": "error"
+  }
+}

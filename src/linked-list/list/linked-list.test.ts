@@ -1,13 +1,13 @@
-const { LinkedList } = require('./linked-list');
-const { LinkedListNode } = require('../node/linked-list-node');
+import { LinkedList } from './linked-list';
+import { LinkedListNode } from '../node/linked-list-node';
 
 describe('LinkedList', () => {
   describe('#constructor', () => {
     test('should nodeify input and set as first node', () => {
       const list = new LinkedList('a');
 
-      expect(list.next instanceof LinkedListNode).toBe(true);
-      expect(list.next.data).toEqual('a');
+      expect(list.root instanceof LinkedListNode).toBe(true);
+      expect(list.root?.data).toEqual('a');
     });
   });
 
@@ -19,7 +19,9 @@ describe('LinkedList', () => {
       const valuesMock = jest.fn(list.values);
       list.values = valuesMock;
 
-      for (let item of list) {}
+      for (const item of list) {
+        item;
+      }
 
       expect(valuesMock.mock.calls.length).toEqual(1);
     });
@@ -31,7 +33,7 @@ describe('LinkedList', () => {
       const list = new LinkedList('a');
       list.insertEndNode('b');
 
-      for (let item of list.values()) {
+      for (const item of list.values()) {
         values.push(item.data);
       }
 
@@ -44,7 +46,8 @@ describe('LinkedList', () => {
       const list = new LinkedList('a');
       list.removeLastNode();
 
-      for (let item of list.values()) {
+      for (const item of list.values()) {
+        item;
         ++iterations;
       }
 
@@ -55,9 +58,9 @@ describe('LinkedList', () => {
   describe('#getLastNode', () => {
     test('should return last node', () => {
       const list = new LinkedList('a');
-      expect(list.getLastNode().data).toEqual('a');
+      expect(list.getLastNode()?.data).toEqual('a');
       list.insertEndNode('b');
-      expect(list.getLastNode().data).toEqual('b');
+      expect(list.getLastNode()?.data).toEqual('b');
     });
 
     test('should return null if there are no nodes', () => {
@@ -74,7 +77,7 @@ describe('LinkedList', () => {
       list.insertEndNode('b');
       list.insertEndNode('c');
 
-      expect(list.getSecondLastNode().data).toEqual('b');
+      expect(list.getSecondLastNode()?.data).toEqual('b');
     });
 
     test('should return null if there is no second last node', () => {
@@ -85,7 +88,7 @@ describe('LinkedList', () => {
   });
 
   describe('#getNodeByIndex', () => {
-    let list;
+    let list: LinkedList<any>;
 
     beforeEach(() => {
       list = new LinkedList('a');
@@ -96,15 +99,15 @@ describe('LinkedList', () => {
     });
 
     test('should find and return first item', () => {
-      expect(list.getNodeByIndex(0).data).toEqual('a');
+      expect(list.getNodeByIndex(0)?.data).toEqual('a');
     });
 
     test('should find and return middle item', () => {
-      expect(list.getNodeByIndex(2).data).toEqual('c');
+      expect(list.getNodeByIndex(2)?.data).toEqual('c');
     });
 
     test('should find and return last item', () => {
-      expect(list.getNodeByIndex(4).data).toEqual('e');
+      expect(list.getNodeByIndex(4)?.data).toEqual('e');
     });
 
     test('should return null if item does not exist', () => {
@@ -119,6 +122,7 @@ describe('LinkedList', () => {
 
     test('should throw if non-numeric index was passed', () => {
       expect(() => {
+        // @ts-ignore
         list.getNodeByIndex('string');
       }).toThrow();
     });
@@ -131,8 +135,8 @@ describe('LinkedList', () => {
   });
 
   describe('#findNodeByData', () => {
-    let list;
-    let data = {obj: 'value'};
+    let list: LinkedList<any>;
+    const data = { obj: 'value' };
     const node = new LinkedListNode(data);
 
     beforeEach(() => {
@@ -150,14 +154,14 @@ describe('LinkedList', () => {
     });
 
     test('should return null if the list does not contain node with given data', () => {
-      expect(list.findNodeByData({obj: 'value'})).toBeNull();
+      expect(list.findNodeByData({ obj: 'value' })).toBeNull();
       expect(list.findNodeByData('d')).toBeNull();
     });
   });
 
   describe('#hasNode', () => {
-    let list;
-    let node;
+    let list: LinkedList<any>;
+    let node: LinkedListNode<any>;
 
     beforeEach(() => {
       list = new LinkedList('a');
@@ -195,7 +199,7 @@ describe('LinkedList', () => {
       const list = new LinkedList('a');
       list.removeLastNode();
 
-      expect(list.next).toBeNull();
+      expect(list.root).toBeNull();
     });
 
     test('should remove last node if there are more than two nodes in the list', () => {
@@ -204,9 +208,9 @@ describe('LinkedList', () => {
       list.insertEndNode('c');
       list.removeLastNode();
 
-      expect(list.next.data).toEqual('a');
-      expect(list.next.next.data).toEqual('b');
-      expect(list.next.next.next).toBeNull();
+      expect(list.root?.data).toEqual('a');
+      expect(list.root?.next?.data).toEqual('b');
+      expect(list.root?.next?.next).toBeNull();
     });
 
     test('should take no action if there are no nodes in the list', () => {
@@ -215,7 +219,7 @@ describe('LinkedList', () => {
       list.removeLastNode();
       list.removeLastNode();
 
-      expect(list.next).toBeNull();
+      expect(list.root).toBeNull();
     });
   });
 
@@ -224,7 +228,7 @@ describe('LinkedList', () => {
       const list = new LinkedList('a');
       list.removeFirstNode();
 
-      expect(list.next).toBeNull();
+      expect(list.root).toBeNull();
     });
 
     test('should remove first nodes if there are more than two nodes in the list', () => {
@@ -235,9 +239,9 @@ describe('LinkedList', () => {
       list.removeFirstNode();
       list.removeFirstNode();
 
-      expect(list.next.data).toEqual('c');
-      expect(list.next.next.data).toEqual('d');
-      expect(list.next.next.next).toBeNull();
+      expect(list.root?.data).toEqual('c');
+      expect(list.root?.next?.data).toEqual('d');
+      expect(list.root?.next?.next).toBeNull();
     });
 
     test('should take no action if the list is empty', () => {
@@ -247,12 +251,12 @@ describe('LinkedList', () => {
       list.removeFirstNode();
       list.removeFirstNode();
 
-      expect(list.next).toBeNull();
+      expect(list.root).toBeNull();
     });
   });
 
   describe('#removeNodeAtIndex', () => {
-    let list;
+    let list: LinkedList<any>;
 
     beforeEach(() => {
       list = new LinkedList('a');
@@ -263,25 +267,25 @@ describe('LinkedList', () => {
     test('should remove first node in the list', () => {
       list.removeNodeAtIndex(0);
 
-      expect(list.next.data).toEqual('b');
-      expect(list.next.next.data).toEqual('c');
-      expect(list.next.next.next).toBeNull();
+      expect(list.root?.data).toEqual('b');
+      expect(list.root?.next?.data).toEqual('c');
+      expect(list.root?.next?.next).toBeNull();
     });
 
     test('should remove middle node from the list', () => {
       list.removeNodeAtIndex(1);
 
-      expect(list.next.data).toEqual('a');
-      expect(list.next.next.data).toEqual('c');
-      expect(list.next.next.next).toBeNull();
+      expect(list.root?.data).toEqual('a');
+      expect(list.root?.next?.data).toEqual('c');
+      expect(list.root?.next?.next).toBeNull();
     });
 
     test('should remove last node in the list', () => {
       list.removeNodeAtIndex(2);
 
-      expect(list.next.data).toEqual('a');
-      expect(list.next.next.data).toEqual('b');
-      expect(list.next.next.next).toBeNull();
+      expect(list.root?.data).toEqual('a');
+      expect(list.root?.next?.data).toEqual('b');
+      expect(list.root?.next?.next).toBeNull();
     });
 
     test('should remove all items from the list', () => {
@@ -289,7 +293,7 @@ describe('LinkedList', () => {
       list.removeNodeAtIndex(0);
       list.removeNodeAtIndex(0);
 
-      expect(list.next).toBeNull();
+      expect(list.root).toBeNull();
     });
 
     test('should return true if the removal was successful', () => {
@@ -314,22 +318,22 @@ describe('LinkedList', () => {
       list.removeLastNode();
       list.insertEndNode(new LinkedListNode('b'));
 
-      expect(list.next.data).toEqual('b');
+      expect(list.root?.data).toEqual('b');
     });
 
     test('should insert new node at the end if the list is not empty', () => {
       const list = new LinkedList('a');
       list.insertEndNode(new LinkedListNode('b'));
 
-      expect(list.next.next.data).toEqual('b');
+      expect(list.root?.next?.data).toEqual('b');
     });
 
     test('should nodify input', () => {
       const list = new LinkedList('a');
       list.insertEndNode('b');
 
-      expect(list.next instanceof LinkedListNode).toBe(true);
-      expect(list.next.next instanceof LinkedListNode).toBe(true);
+      expect(list.root instanceof LinkedListNode).toBe(true);
+      expect(list.root?.next instanceof LinkedListNode).toBe(true);
     });
   });
 
@@ -339,22 +343,22 @@ describe('LinkedList', () => {
       list.removeLastNode();
       list.insertBeginningNode(new LinkedListNode('a'));
 
-      expect(list.next.data).toEqual('a');
+      expect(list.root?.data).toEqual('a');
     });
 
     test('should insert new node at the beginning if the list is not empty', () => {
       const list = new LinkedList('b');
       list.insertBeginningNode(new LinkedListNode('a'));
 
-      expect(list.next.data).toEqual('a');
+      expect(list.root?.data).toEqual('a');
     });
 
     test('should nodify input', () => {
       const list = new LinkedList('b');
       list.insertBeginningNode('a');
 
-      expect(list.next instanceof LinkedListNode).toBe(true);
-      expect(list.next.next instanceof LinkedListNode).toBe(true);
+      expect(list.root instanceof LinkedListNode).toBe(true);
+      expect(list.root?.next instanceof LinkedListNode).toBe(true);
     });
   });
 });

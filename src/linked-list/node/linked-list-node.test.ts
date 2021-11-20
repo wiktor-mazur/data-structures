@@ -1,9 +1,9 @@
-const { LinkedListNode } = require('./linked-list-node');
+import { LinkedListNode } from './linked-list-node';
 
 describe('LinkedListNode', () => {
   describe('#constructor', () => {
     test('should set given data', () => {
-      const obj = {data: Symbol()};
+      const obj = { data: Symbol() };
       const node = new LinkedListNode(obj);
 
       expect(node.data).toEqual(obj);
@@ -11,7 +11,7 @@ describe('LinkedListNode', () => {
 
     describe('when next pointer was not passed', () => {
       test('should set next to null', () => {
-        const node = new LinkedListNode();
+        const node = new LinkedListNode(null);
 
         expect(node.next).toBeNull();
       });
@@ -40,7 +40,7 @@ describe('LinkedListNode', () => {
           const node = new LinkedListNode('a', 'b');
 
           expect(node.next instanceof LinkedListNode).toBe(true);
-          expect(node.next.data).toEqual('b');
+          expect(node.next?.data).toEqual('b');
         });
       });
     });
@@ -75,7 +75,7 @@ describe('LinkedListNode', () => {
         node.insertNodeAfter(nextNode);
 
         expect(node.next).toEqual(nextNode);
-        expect(node.next.next).toBeNull();
+        expect(node.next?.next).toBeNull();
       });
     });
 
@@ -85,9 +85,9 @@ describe('LinkedListNode', () => {
         const node = new LinkedListNode('a', 'c');
         node.insertNodeAfter(nextNode);
 
-        expect(node.next.data).toEqual('b');
-        expect(node.next.next.data).toEqual('c');
-        expect(node.next.next.next).toBeNull();
+        expect(node.next?.data).toEqual('b');
+        expect(node.next?.next?.data).toEqual('c');
+        expect(node.next?.next?.next).toBeNull();
       });
     });
   });
@@ -110,8 +110,8 @@ describe('LinkedListNode', () => {
         node.removeNodeAfter();
 
         expect(node.data).toEqual('a');
-        expect(node.next.data).toEqual('c');
-        expect(node.next.next).toBeNull();
+        expect(node.next?.data).toEqual('c');
+        expect(node.next?.next).toBeNull();
       });
     });
 

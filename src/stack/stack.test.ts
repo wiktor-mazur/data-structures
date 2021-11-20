@@ -1,18 +1,14 @@
-const { Stack } = require('./stack');
+import { Stack } from './stack';
 
 describe('Stack', () => {
-  let stack;
-
-  test('should set empty storage and proper top pointer on construction', () => {
-    const stack = new Stack();
-    expect(stack._storage).toEqual([]);
-    expect(stack._top).toEqual(-1);
-  });
+  let stack: Stack<any>;
+  let emptyStack: Stack<any>;
 
   beforeEach(() => {
-    stack = new Stack();
-    stack._storage = [1, 'f', 5, 'test', 6, true, 19];
-    stack._top = 6;
+    stack = new Stack()
+    stack.pushMany([1, 'f', 5, 'test', 6, true, 19]);
+
+    emptyStack = new Stack();
   });
 
   describe('#peek', () => {
@@ -26,9 +22,7 @@ describe('Stack', () => {
     });
 
     test('should return null if stack is empty', () => {
-      stack._storage = [];
-      stack._top = -1;
-      expect(stack.peek()).toBeNull();
+      expect(emptyStack.peek()).toBeNull();
     });
   });
 
@@ -52,15 +46,17 @@ describe('Stack', () => {
     });
 
     test('should return true if stack is empty', () => {
-      stack._storage = [];
-      stack._top = -1;
-      expect(stack.isEmpty()).toBe(true);
+      expect(emptyStack.isEmpty()).toBe(true);
     });
   });
 
   describe('#size', () => {
     test('should return stack\'s size', () => {
       expect(stack.size()).toEqual(7);
+    });
+
+    test('should return empty stack\'s size', () => {
+      expect(emptyStack.size()).toEqual(0);
     });
   });
 
@@ -75,6 +71,39 @@ describe('Stack', () => {
     });
   });
 
+  describe('#pushMany', () => {
+    test('should enqueue the array of items', () => {
+      emptyStack.push('first');
+      emptyStack.pushMany(['enqueue_test', 'enqueue_test2', 'enqueue_test3']);
+      expect(emptyStack.pop()).toEqual('enqueue_test3');
+      expect(emptyStack.pop()).toEqual('enqueue_test2');
+      expect(emptyStack.pop()).toEqual('enqueue_test');
+      expect(emptyStack.pop()).toEqual('first');
+    });
+
+    test('should enqueue the iterable object', () => {
+      const iterable = {
+        *[Symbol.iterator]() {
+          yield 'enqueue_test234';
+          yield 'enqueue_test678';
+          yield 'enqueue_test863';
+        }
+      };
+
+      emptyStack.push('first');
+      emptyStack.pushMany(iterable);
+      expect(emptyStack.pop()).toEqual('enqueue_test863');
+      expect(emptyStack.pop()).toEqual('enqueue_test678');
+      expect(emptyStack.pop()).toEqual('enqueue_test234');
+      expect(emptyStack.pop()).toEqual('first');
+    });
+
+    test('should throw if non-iterable argument was passed', () => {
+      // @ts-ignore
+      expect(() => {queue.batchEnqueue({ obj: 1 })}).toThrow();
+    });
+  });
+
   describe('#pop', () => {
     test('should remove the topmost element from the stack', () => {
       stack.pop();
@@ -86,16 +115,16 @@ describe('Stack', () => {
     });
 
     test('should return null if stack was empty', () => {
-      stack._storage = [];
-      stack._top = -1;
-      expect(stack.pop()).toBeNull();
+      expect(emptyStack.pop()).toBeNull();
     });
   });
 
   describe('#swap', () => {
     test('should swap places of the top two element on the stack', () => {
+      expect(stack.peek()).toEqual(19);
       stack.swap();
-      expect(stack._storage).toEqual([1, 'f', 5, 'test', 6, 19, true]);
+      expect(stack.pop()).toEqual(true);
+      expect(stack.pop()).toEqual(19);
     });
   });
 });
